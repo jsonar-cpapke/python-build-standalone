@@ -37,7 +37,9 @@ EXTRA_TARGET_CFLAGS=${EXTRA_TARGET_CFLAGS/\-arch x86_64/}
 
 EXTRA_FLAGS="${EXTRA_FLAGS} ${EXTRA_TARGET_CFLAGS}"
 
+# enable-fips
 /usr/bin/perl ./Configure --prefix=/tools/deps ${OPENSSL_TARGET} no-shared no-tests ${EXTRA_FLAGS}
 
 make -j ${NUM_CPUS}
-make -j ${NUM_CPUS} install_sw install_ssldirs DESTDIR=${ROOT}/out
+make -j ${NUM_CPUS} install_sw install_ssldirs install_fips DESTDIR=${ROOT}/out
+#/build/out/tools/deps/bin/openssl fipsinstall -out /build/out/etc/ssl/fipsmodule.cnf -module /build/out/tools/deps/lib64/ossl-modules/fips.so
